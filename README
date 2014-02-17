@@ -1,0 +1,39 @@
+How to compile?
+
+This is a maven project. Go to the directory where the pom.xml file exists and use:
+
+mvn clean install
+
+to build the whole project.
+
+
+
+How to run?
+
+After you successfully build the project. There will be a .jar file under the target directory.
+Use:
+
+java -jar jar-file port_number
+
+to run the proxy server program. Also you need to set up the correct proxy server in your browser.
+
+I already include a pre-built jar file under the target directory.
+
+
+
+Cache related
+
+I include several cache mechanism for the proxy server like FIFOCache which use the first in
+first out cache algorithm. Also I include a DiskCache which caches the http response on local
+disk. For testing purpose, I also include a NullCache which means doesn't use cache at all. To
+set up the cache mechanism for the proxy server, just use:
+
+Cache cache = new FIFOCache(1000); // 1000 is cache capacity
+ProxyServer proxyServer = new ProxyServer(port, cache);
+
+If you want to use another cache mechanism just use:
+
+Cache cache = new DiskCache(cacheRoot); // cacheRoot is the root directory to store the http
+response
+ProxyServer proxyServer = new ProxyServer(port, cache);
+
